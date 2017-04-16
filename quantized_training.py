@@ -435,7 +435,7 @@ def main(argv = None):
         # images = pre_process(x, 1)
         pred = cov_network(images, weights, biases, keep_prob)
         # print(pred)
-        cross_entropy = tf.nn.softmax_cross_entropy_with_logits(pred, y)
+        cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits = pred, labels = y)
         loss_value = tf.reduce_mean(cross_entropy)
 
         correct_prediction = tf.equal(tf.argmax(pred,1), tf.argmax(y,1))
