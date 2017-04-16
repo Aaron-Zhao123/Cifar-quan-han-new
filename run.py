@@ -16,7 +16,7 @@ pcov = 0
 pfc = 0
 retrain = 0
 parent_dir = './'
-base_model_name = 'base.pkl'
+base_model = 'base.pkl'
 cluster = [8, 16, 32, 64, 128, 256, 512, 1024]
 while (count < len(cluster)):
     Clustering_weights_cifar10.main(cluster[count])
