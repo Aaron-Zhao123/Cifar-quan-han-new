@@ -17,7 +17,7 @@ pfc = 0
 retrain = 0
 parent_dir = './'
 base_model = 'base.pkl'
-cluster = [8, 16, 32, 64, 128, 256, 512, 1024]
+cluster = [16, 32, 64, 128, 256, 512, 1024]
 while (count < len(cluster)):
     Clustering_weights_cifar10.main(cluster[count])
     # measure acc
@@ -47,7 +47,7 @@ while (count < len(cluster)):
         ('-pfc',pfc),
         ('-t', 0),
         ('-cluster',cluster[count]),
-        ('-pretrain',0)
+        ('-pretrain',0),
         ('-parent_dir', parent_dir),
         ('-base_model', base_model)
         ]
