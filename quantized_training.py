@@ -515,10 +515,21 @@ def main(argv = None):
                         accuracy_list = np.concatenate((np.array([train_acc]),accuracy_list[0:4]))
                         if (np.mean(accuracy_list) > 0.8):
                             print("training accuracy is large, show the list: {}".format(accuracy_list))
-                            test_acc = sess.run(accuracy, feed_dict = {
-                                                    x: images_test,
-                                                    y: labels_test,
-                                                    keep_prob: 1.0})
+                            NUMBER_OF_BATCH = 10000 / BATCH_SIZE
+                            t_acc = []
+                            for i in range(0,NUMBER_OF_BATCH):
+                                (batch_x, batch_y) = test_data.feed_next_batch(BATCH_SIZE)
+                                test_acc = sess.run(accuracy, feed_dict = {
+                                                        x: batch_x,
+                                                        y: batch_y,
+                                                        keep_prob: 1.0})
+                                t_acc.append(test_acc)
+                            print("test accuracy is {}".format(t_acc))
+                            test_acc = np.mean(t_acc)
+                            # test_acc = sess.run(accuracy, feed_dict = {
+                            #                         x: images_test,
+                            #                         y: labels_test,
+                            #                         keep_prob: 1.0})
                             # accuracy_list = np.zeros(30)
                             accuracy_list = np.zeros(5)
                             print('test accuracy is {}'.format(test_acc))
