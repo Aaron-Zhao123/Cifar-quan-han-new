@@ -497,7 +497,6 @@ def main(argv = None):
                 for i in range(0,10000):
                     (batch_x, batch_y) = t_data.feed_next_batch(BATCH_SIZE)
                     print(np.shape(batch_x))
-                    sys.exit()
                     train_acc, cross_en = sess.run([accuracy, loss_value], feed_dict = {
                                     x: batch_x,
                                     y: batch_y,
@@ -542,12 +541,16 @@ def main(argv = None):
                     pickle.dump((weights_save, biases_orgs, cluster_index,centroids_save),f)
 
 
-            (batch_x, batch_y) = test_data.feed_next_batch(BATCH_SIZE)
-            test_acc = sess.run(accuracy, feed_dict = {
-                                    x: images_test[0:10],
-                                    y: labels_test[0:10],
-                                    keep_prob: 1.0})
-            print("test accuracy is {}".format(test_acc))
+            NUMBER_OF_BATCH = 10000 / BATCH_SIZE
+            t_acc = []
+            for i in range(0,NUMBER_OF_BATCH):
+                (batch_x, batch_y) = test_data.feed_next_batch(BATCH_SIZE)
+                test_acc = sess.run(accuracy, feed_dict = {
+                                        x: batch_x,
+                                        y: batch_y,
+                                        keep_prob: 1.0})
+                t_acc.append(test_acc)
+            print("test accuracy is {}".format(t_acc))
                 # save_pkl_model(weights, biases, model_name)
         return test_acc
     except Usage, err:
