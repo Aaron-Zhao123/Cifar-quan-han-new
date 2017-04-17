@@ -24,7 +24,7 @@ pfc = 0
 retrain = 0
 parent_dir = './'
 base_model = 'base.pkl'
-cluster = [16, 32, 64, 128, 256, 512, 1024]
+cluster = [64, 128, 256, 512, 1024]
 while (count < len(cluster)):
     Clustering_weights_cifar10.main(cluster[count])
     # measure acc
@@ -62,7 +62,7 @@ while (count < len(cluster)):
     pt_acc_list.append(pre_train_acc)
     acc_list.append(train_acc)
     print(pt_acc_list)
-    print(acc_list)
+    print(acc_list€)
     dump_to_txt_files(pt_acc_list, acc_list)
     count = count + 1
 print('accuracy summary: {}'.format(pt_acc_list))
