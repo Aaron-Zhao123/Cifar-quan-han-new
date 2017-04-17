@@ -539,8 +539,8 @@ def main(argv = None):
                     pickle.dump((weights_save, biases_orgs, cluster_index,centroids_save),f)
 
             test_acc = sess.run(accuracy, feed_dict = {
-                                    x: images_test,
-                                    y: labels_test,
+                                    x: images_test[0:10],
+                                    y: labels_test[0:10],
                                     keep_prob: 1.0})
             print("test accuracy is {}".format(test_acc))
                 # save_pkl_model(weights, biases, model_name)
