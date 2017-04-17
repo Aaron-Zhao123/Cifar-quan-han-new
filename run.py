@@ -15,7 +15,7 @@ def dump_to_txt_files(pt_acc_list, acc_list):
     with open("acc_cifar_quantize_han.txt", "w") as f:
         for item in acc_list:
             f.write("%s\n"%item)
-            
+
 acc_list = []
 pt_acc_list = []
 count = 0
@@ -61,6 +61,8 @@ while (count < len(cluster)):
     train_acc = quantized_training.main(param)
     pt_acc_list.append(pre_train_acc)
     acc_list.append(train_acc)
+    print(pt_acc_list)
+    print(acc_list)
     dump_to_txt_files(pt_acc_list, acc_list)
     count = count + 1
 print('accuracy summary: {}'.format(pt_acc_list))
