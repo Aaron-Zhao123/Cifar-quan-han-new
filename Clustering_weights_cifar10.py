@@ -238,7 +238,7 @@ def loss(logits, labels):
   # decay terms (L2 loss).
   return tf.add_n(tf.get_collection('losses'), name='total_loss')
 
-class training_data():
+class format_data():
     def __init__ (self, images, labels):
         self.images = images
         self.labels = labels
@@ -376,7 +376,7 @@ def main(argv = None):
     class_names = cifar10.load_class_names()
     images_train, cls_train, labels_train = cifar10.load_training_data()
     images_test, cls_test, labels_test = cifar10.load_test_data()
-    t_data = training_data(images_train, labels_train)
+    test_data = format_data(images_test, labels_test)
 
     DATA_CNT = len(images_train)
     NUMBER_OF_BATCH = DATA_CNT / BATCH_SIZE
@@ -415,10 +415,18 @@ def main(argv = None):
 
         print('quantisation process starts..')
         prune_info(weights, 0)
-        test_acc = sess.run(accuracy, feed_dict = {
-                                x: images_test,
-                                y: labels_test,
-                                keep_prob: 1.0})
+        NUMBER_OF_BATCH = 10000 / BATCH_SIZE
+        t_acc = []
+        test_data = format_data(images_test, labels_test)
+        for i in range(0,NUMBER_OF_BATCH):
+            (batch_x, batch_y) = test_data.feed_next_batch(BATCH_SIZE)
+            test_acc = sess.run(accuracy, feed_dict = {
+                                    x: batch_x,
+                                    y: batch_y,
+                                    keep_prob: 1.0})
+            t_acc.append(test_acc)
+        print("test accuracy is {}".format(t_acc))
+        test_acc = np.mean(t_acc)
         print('Pre quantisation model has an accuracy of {}'.format(test_acc))
         print(78*'-')
         start = time.time()

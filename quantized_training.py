@@ -496,7 +496,6 @@ def main(argv = None):
                 # for i in range(0,20):
                 for i in range(0,10000):
                     (batch_x, batch_y) = t_data.feed_next_batch(BATCH_SIZE)
-                    print(np.shape(batch_x))
                     train_acc, cross_en = sess.run([accuracy, loss_value], feed_dict = {
                                     x: batch_x,
                                     y: batch_y,
