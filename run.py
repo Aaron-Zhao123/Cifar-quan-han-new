@@ -26,7 +26,7 @@ parent_dir = './'
 base_model = 'base.pkl'
 cluster = [64, 128, 256, 512, 1024]
 while (count < len(cluster)):
-    Clustering_weights_cifar10.main(cluster[count])
+    # Clustering_weights_cifar10.main(cluster[count])
     # measure acc
     param = [
         ('-pcov',pcov),
