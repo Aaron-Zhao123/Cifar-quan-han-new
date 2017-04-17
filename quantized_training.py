@@ -246,7 +246,7 @@ def loss(logits, labels):
   # decay terms (L2 loss).
   return tf.add_n(tf.get_collection('losses'), name='total_loss')
 
-class training_data():
+class format_data():
     def __init__ (self, images, labels):
         self.images = images
         self.labels = labels
@@ -412,7 +412,8 @@ def main(argv = None):
 
         images_train, cls_train, labels_train = cifar10.load_training_data()
         images_test, cls_test, labels_test = cifar10.load_test_data()
-        t_data = training_data(images_train, labels_train)
+        t_data = format_data(images_train, labels_train)
+        test_data = format_data(images_test, labels_test)
 
         DATA_CNT = len(images_train)
         NUMBER_OF_BATCH = DATA_CNT / BATCH_SIZE
@@ -495,6 +496,8 @@ def main(argv = None):
                 # for i in range(0,20):
                 for i in range(0,10000):
                     (batch_x, batch_y) = t_data.feed_next_batch(BATCH_SIZE)
+                    print(np.shape(batch_x))
+                    sys.exit()
                     train_acc, cross_en = sess.run([accuracy, loss_value], feed_dict = {
                                     x: batch_x,
                                     y: batch_y,
@@ -538,6 +541,8 @@ def main(argv = None):
                 with open(parent_dir + 'weights/'+ 'weights'+str(NUMBER_OF_CLUSTER)+'.pkl','wb') as f:
                     pickle.dump((weights_save, biases_orgs, cluster_index,centroids_save),f)
 
+
+            (batch_x, batch_y) = test_data.feed_next_batch(BATCH_SIZE)
             test_acc = sess.run(accuracy, feed_dict = {
                                     x: images_test[0:10],
                                     y: labels_test[0:10],
