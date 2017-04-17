@@ -551,9 +551,8 @@ def main(argv = None):
                                         keep_prob: 1.0})
                 t_acc.append(test_acc)
             print("test accuracy is {}".format(t_acc))
-            sys.exit()
                 # save_pkl_model(weights, biases, model_name)
-        return test_acc
+        return np.mean(t_acc)
     except Usage, err:
         print >> sys.stderr, err.msg
         print >> sys.stderr, "for help use --help"
