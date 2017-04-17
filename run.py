@@ -62,7 +62,7 @@ while (count < len(cluster)):
     pt_acc_list.append(pre_train_acc)
     acc_list.append(train_acc)
     print(pt_acc_list)
-    print(acc_list€)
+    print(acc_list)
     dump_to_txt_files(pt_acc_list, acc_list)
     count = count + 1
 print('accuracy summary: {}'.format(pt_acc_list))
