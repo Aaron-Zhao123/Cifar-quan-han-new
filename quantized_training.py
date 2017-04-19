@@ -88,6 +88,7 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
         tmp = np.zeros(sn)
         print(np.shape(tmp))
         print(np.shape(tmp[:,0]))
+        print(np.shape(tmp[...,0]))
         for i in range(1, NUMBER_OF_CLUSTER + 1):
             tmp[i-1] = (cluster_index[key] == i)
         weights_index[key] = tmp
