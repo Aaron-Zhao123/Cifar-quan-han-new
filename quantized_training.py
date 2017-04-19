@@ -448,7 +448,7 @@ def main(argv = None):
         training_data_list = []
 
         biases, centroids_var, weights_index, cluster_index, centroids = initialize_variables(PREV_MODEL_EXIST, parent_dir,NUMBER_OF_CLUSTER, pretrain)
-        print(np.shape(weights_index))
+        print(np.shape(weights_index['cov1']))
         sys.exit()
         weights = compute_weights(weights_index, centroids_var, NUMBER_OF_CLUSTER)
 
