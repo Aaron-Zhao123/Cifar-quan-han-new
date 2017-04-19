@@ -82,7 +82,7 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
     keys = ['cov1','cov2','fc1','fc2', 'fc3']
     for key in keys:
         s = np.shape(cluster_index[key])
-        sn = sn + (NUMBER_OF_CLUSTER,)
+        sn = s + (NUMBER_OF_CLUSTER,)
         tmp = np.zeros(sn)
         for i in range(1, NUMBER_OF_CLUSTER + 1):
             tmp[i-1] = (cluster_index[key] == i)
