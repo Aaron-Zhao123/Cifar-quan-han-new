@@ -471,14 +471,13 @@ def main(argv = None):
         # variables_averages_op = variable_averages.apply(tf.trainable_variables())
 
 
-        init = tf.global_variables_initializer()
         accuracy_list = np.zeros(30)
         accuracy_list = np.zeros(5)
         # Launch the graph
         print('Graph launching ..')
         ops.reset_default_graph()
         with tf.Session() as sess:
-            sess.run(init)
+            sess.run(tf.global_variables_initializer())
 
             keys = ['cov1', 'cov2', 'fc1', 'fc2', 'fc3']
             for key in keys:
@@ -549,7 +548,6 @@ def main(argv = None):
 
             NUMBER_OF_BATCH = 10000 / BATCH_SIZE
             t_acc = []
-            sys.exit()
             for i in range(0,NUMBER_OF_BATCH):
                 (batch_x, batch_y) = test_data.feed_next_batch(BATCH_SIZE)
                 test_acc = sess.run(accuracy, feed_dict = {
@@ -557,6 +555,7 @@ def main(argv = None):
                                         y: batch_y,
                                         keep_prob: 1.0})
                 t_acc.append(test_acc)
+            sys.exit()
             print("test accuracy is {}".format(t_acc))
                 # save_pkl_model(weights, biases, model_name)
         return np.mean(t_acc)
