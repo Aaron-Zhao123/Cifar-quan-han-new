@@ -444,29 +444,28 @@ def main(argv = None):
         correct_prediction = tf.equal(tf.argmax(pred,1), tf.argmax(y,1))
         accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-        saver = tf.train.Saver()
 
 
-        global_step = tf.contrib.framework.get_or_create_global_step()
-
-        num_batches_per_epoch = NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN / BATCH_SIZE
-        decay_steps = int(num_batches_per_epoch * NUM_EPOCHS_PER_DECAY)
-
-        # Decay the learning rate exponentially based on the number of steps.
-        lr = tf.train.exponential_decay(INITIAL_LEARNING_RATE,
-                                      global_step,
-                                      decay_steps,
-                                      LEARNING_RATE_DECAY_FACTOR,
-                                      staircase=True)
-
-        opt = tf.train.GradientDescentOptimizer(lr)
-        grads = opt.compute_gradients(loss_value)
-        org_grads = [(ClipIfNotNone(grad), var) for grad, var in grads]
-        new_grads = mask_gradients(weights, org_grads, weights_mask, biases, biases_mask)
+        # global_step = tf.contrib.framework.get_or_create_global_step()
         #
-        # Apply gradients.
-        train_step = opt.apply_gradients(new_grads, global_step=global_step)
-        # train_step = tf.train.GradientDescentOptimizer(INITIAL_LEARNING_RATE).minimize(loss_value)
+        # num_batches_per_epoch = NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN / BATCH_SIZE
+        # decay_steps = int(num_batches_per_epoch * NUM_EPOCHS_PER_DECAY)
+        #
+        # # Decay the learning rate exponentially based on the number of steps.
+        # lr = tf.train.exponential_decay(INITIAL_LEARNING_RATE,
+        #                               global_step,
+        #                               decay_steps,
+        #                               LEARNING_RATE_DECAY_FACTOR,
+        #                               staircase=True)
+        #
+        # opt = tf.train.GradientDescentOptimizer(lr)
+        # grads = opt.compute_gradients(loss_value)
+        # org_grads = [(ClipIfNotNone(grad), var) for grad, var in grads]
+        # new_grads = mask_gradients(weights, org_grads, weights_mask, biases, biases_mask)
+
+        # # Apply gradients.
+        # train_step = opt.apply_gradients(new_grads, global_step=global_step)
+        train_step = tf.train.AdamOptimizer(1e-4).minimize(loss_value)
         # variable_averages = tf.train.ExponentialMovingAverage(
         #   MOVING_AVERAGE_DECAY, global_step)
         # variables_averages_op = variable_averages.apply(tf.trainable_variables())
@@ -491,7 +490,7 @@ def main(argv = None):
             start = time.time()
             if TRAIN == 1:
                 for i in range(0,10000):
-                    (batch_x, batch_y) = t_data.feed_next_batch(8)
+                    (batch_x, batch_y) = t_data.feed_next_batch(BATCH_SIZE)
                     train_acc, cross_en = sess.run([accuracy, loss_value], feed_dict = {
                                     x: batch_x,
                                     y: batch_y,
