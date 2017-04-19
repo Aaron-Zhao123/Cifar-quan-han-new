@@ -85,7 +85,7 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
     print(np.shape(weights_index['cov1']))
     print((cluster_index['cov1']))
     print((weights_index['cov1'][0]))
-    sys.exit()
+    # sys.exit()
     # weights_index = {
     #     'cov1': cluster_index['cov1'],
     #     'cov2': cluster_index['cov2'],
@@ -115,7 +115,7 @@ def compute_weights(weights_index, centroids_var, Number_of_cluster):
     print('in compute weights')
     print(np.shape(weights_index['cov1']))
     for key in keys:
-        weights[key] = tf.matmul(tf.cast(weights_index[key], tf.float32), tf.cast(centroids_var[key], tf.float32))
+        weights[key] = tf.matmul(tf.cast(weights_index[key], tf.float32), tf.cast(centroids_var[key], tf.float32),a_is_sparse=True)
         # weights[key] = tf.to_float(tf.equal(weights_index[key], 1)) * centroids_var[key][0]
         # print(weights_index[key])
         # for i in range(1, Number_of_cluster + 1):
