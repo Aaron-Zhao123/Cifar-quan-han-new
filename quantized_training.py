@@ -482,7 +482,7 @@ def main(argv = None):
 
             keys = ['cov1', 'cov2', 'fc1', 'fc2', 'fc3']
             for key in keys:
-                sess.run(weights[key].assign(weights[key].eval()*weights_mask[key]))
+                sess.run(weights[key].assign(weights[key].eval(session= sess)*weights_mask[key]))
                 # sess.run(biases[key].assign(biases[key].eval()*biases_mask[key]))
 
             print('pre train pruning info')
