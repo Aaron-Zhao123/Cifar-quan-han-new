@@ -69,13 +69,7 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
         'fc2': tf.Variable(centroids['fc2']),
         'fc3': tf.Variable(centroids['fc3'])
     }
-    # weights_index = {
-    #     'cov1': tf.constant(cluster_index['cov1'],tf.float32),
-    #     'cov2': tf.constant(cluster_index['cov2'],tf.float32),
-    #     'fc1': tf.constant(cluster_index['fc1'],tf.float32),
-    #     'fc2': tf.constant(cluster_index['fc2'],tf.float32),
-    #     'fc3': tf.constant(cluster_index['fc3'],tf.float32)
-    # }
+
 
     #  reconfig weights_index
     weights_index = {}
@@ -96,6 +90,13 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
     #     'fc2': cluster_index['fc2'],
     #     'fc3': cluster_index['fc3']
     # }
+    weights_index = {
+        'cov1': tf.constant(weights_index['cov1'],tf.float32),
+        'cov2': tf.constant(weights_index['cov2'],tf.float32),
+        'fc1': tf.constant(weights_index['fc1'],tf.float32),
+        'fc2': tf.constant(weights_index['fc2'],tf.float32),
+        'fc3': tf.constant(weights_index['fc3'],tf.float32)
+    }
     biases = {
         'cov1': tf.Variable(biases_orgs['cov1']),
         'cov2': tf.Variable(biases_orgs['cov2']),
