@@ -90,13 +90,13 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
     #     'fc2': cluster_index['fc2'],
     #     'fc3': cluster_index['fc3']
     # }
-    weights_index = {
-        'cov1': tf.constant(weights_index['cov1'],tf.float32),
-        'cov2': tf.constant(weights_index['cov2'],tf.float32),
-        'fc1': tf.constant(weights_index['fc1'],tf.float32),
-        'fc2': tf.constant(weights_index['fc2'],tf.float32),
-        'fc3': tf.constant(weights_index['fc3'],tf.float32)
-    }
+    # weights_index = {
+    #     'cov1': tf.constant(weights_index['cov1'],tf.float32),
+    #     'cov2': tf.constant(weights_index['cov2'],tf.float32),
+    #     'fc1': tf.constant(weights_index['fc1'],tf.float32),
+    #     'fc2': tf.constant(weights_index['fc2'],tf.float32),
+    #     'fc3': tf.constant(weights_index['fc3'],tf.float32)
+    # }
     biases = {
         'cov1': tf.Variable(biases_orgs['cov1']),
         'cov2': tf.Variable(biases_orgs['cov2']),
@@ -112,7 +112,7 @@ def compute_weights(weights_index, centroids_var, Number_of_cluster):
     print('in compute weights')
     print(np.shape(weights_index['cov1']))
     for key in keys:
-        weights[key] = weights_index[key] * tf.cast(centroids_var[key], tf.float32)
+        weights[key] = tf.matmul(weights_index[key], tf.cast(centroids_var[key], tf.float32))
         # weights[key] = tf.to_float(tf.equal(weights_index[key], 1)) * centroids_var[key][0]
         # print(weights_index[key])
         # for i in range(1, Number_of_cluster + 1):
