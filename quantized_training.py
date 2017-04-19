@@ -112,7 +112,7 @@ def compute_weights(weights_index, centroids_var, Number_of_cluster):
     print('in compute weights')
     print(np.shape(weights_index['cov1']))
     for key in keys:
-        weights[key] = tf.matmul(weights_index[key], tf.cast(centroids_var[key], tf.float32))
+        weights[key] = tf.matmul(tf.cast(weights_index[key], tf.float32), tf.cast(centroids_var[key], tf.float32))
         # weights[key] = tf.to_float(tf.equal(weights_index[key], 1)) * centroids_var[key][0]
         # print(weights_index[key])
         # for i in range(1, Number_of_cluster + 1):
