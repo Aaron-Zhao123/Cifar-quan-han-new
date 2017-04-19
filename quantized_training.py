@@ -576,7 +576,7 @@ def main(argv = None):
                     biases_save[key] = biases[key].eval()
 
                 with open(parent_dir + 'weights/'+ 'weights'+str(NUMBER_OF_CLUSTER)+'.pkl','wb') as f:
-                    pickle.dump((weights_save, biases_orgs, cluster_index,centroids_save),f)
+                    pickle.dump((weights_save, biases_save, cluster_index,centroids_save),f)
 
 
             NUMBER_OF_BATCH = 10000 / BATCH_SIZE
