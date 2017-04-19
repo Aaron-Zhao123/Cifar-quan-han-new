@@ -89,13 +89,13 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
         weights_index[key] = tmp
     print('in initial vairables')
     print(np.shape(weights_index['cov1']))
-    weights_index = {
-        'cov1': cluster_index['cov1'],
-        'cov2': cluster_index['cov2'],
-        'fc1': cluster_index['fc1'],
-        'fc2': cluster_index['fc2'],
-        'fc3': cluster_index['fc3']
-    }
+    # weights_index = {
+    #     'cov1': cluster_index['cov1'],
+    #     'cov2': cluster_index['cov2'],
+    #     'fc1': cluster_index['fc1'],
+    #     'fc2': cluster_index['fc2'],
+    #     'fc3': cluster_index['fc3']
+    # }
     biases = {
         'cov1': tf.Variable(biases_orgs['cov1']),
         'cov2': tf.Variable(biases_orgs['cov2']),
@@ -449,7 +449,7 @@ def main(argv = None):
 
         biases, centroids_var, weights_index, cluster_index, centroids = initialize_variables(PREV_MODEL_EXIST, parent_dir,NUMBER_OF_CLUSTER, pretrain)
         print(np.shape(weights_index['cov1']))
-        sys.exit()
+        # sys.exit()
         weights = compute_weights(weights_index, centroids_var, NUMBER_OF_CLUSTER)
 
         x = tf.placeholder(tf.float32, [None, 32, 32, 3])
