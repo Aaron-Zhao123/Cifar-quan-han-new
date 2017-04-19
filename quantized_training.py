@@ -115,7 +115,7 @@ def compute_weights(weights_index, centroids_var, Number_of_cluster):
     print('in compute weights')
     print(np.shape(weights_index['cov1']))
     for key in keys:
-        ndim = len(np.shape(weights_index[key]))
+        ndim = len(np.shape(weights_index[key])) - 1
         weights[key] = tf.tensordot(tf.cast(weights_index[key], tf.float32), tf.cast(centroids_var[key], tf.float32),axes=[[ndim],[0]])
         # weights[key] = tf.to_float(tf.equal(weights_index[key], 1)) * centroids_var[key][0]
         # print(weights_index[key])
