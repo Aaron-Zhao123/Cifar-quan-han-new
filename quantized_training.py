@@ -405,7 +405,7 @@ def main(argv = None):
         PREV_MODEL_EXIST = 1
 
 
-        ops.reset_default_graph()
+        # ops.reset_default_graph()
         # cls_train returns as an integer, labels is the array
         print('pruning on cov is {}. on fc is {}'.format(pruning_cov, pruning_fc))
         (weights_mask,biases_mask)= initialize_weights_mask(0, mask_dir + 'masks/' + 'base.pkl' )
@@ -474,10 +474,11 @@ def main(argv = None):
 
         accuracy_list = np.zeros(30)
         accuracy_list = np.zeros(5)
+        init = tf.global_variables_initializer()
         # Launch the graph
         print('Graph launching ..')
         with tf.Session() as sess:
-            sess.run(tf.global_variables_initializer())
+            sess.run(init)
 
             keys = ['cov1', 'cov2', 'fc1', 'fc2', 'fc3']
             for key in keys:
