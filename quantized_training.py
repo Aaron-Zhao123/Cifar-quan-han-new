@@ -83,8 +83,8 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
         weights_index[key] = tmp
     print('in initial vairables')
     print(np.shape(weights_index['cov1']))
-    print((cluster_index['cov1']))
-    print((weights_index['cov1'][0]))
+    # print((cluster_index['cov1']))
+    # print((weights_index['cov1'][0]))
     # sys.exit()
     # weights_index = {
     #     'cov1': cluster_index['cov1'],
@@ -115,7 +115,7 @@ def compute_weights(weights_index, centroids_var, Number_of_cluster):
     print('in compute weights')
     print(np.shape(weights_index['cov1']))
     for key in keys:
-        ndim = len(np.shape(weights[key]))
+        ndim = len(np.shape(weights_index[key]))
         weights[key] = tf.tensordot(tf.cast(weights_index[key], tf.float32), tf.cast(centroids_var[key], tf.float32),axes=[[ndim],[0]])
         # weights[key] = tf.to_float(tf.equal(weights_index[key], 1)) * centroids_var[key][0]
         # print(weights_index[key])
