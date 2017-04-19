@@ -8,6 +8,7 @@ import time
 import getopt
 
 from cifar10 import img_size, num_channels, num_classes
+from tensorflow.python.framework import ops
 
 class Usage(Exception):
     def __init__ (self,msg):
@@ -475,6 +476,7 @@ def main(argv = None):
         accuracy_list = np.zeros(5)
         # Launch the graph
         print('Graph launching ..')
+        ops.reset_default_graph()
         with tf.Session() as sess:
             sess.run(init)
             # restore model if exists
@@ -493,7 +495,6 @@ def main(argv = None):
             print(78*'-')
             start = time.time()
             if TRAIN == 1:
-                # for i in range(0,20):
                 for i in range(0,10000):
                     (batch_x, batch_y) = t_data.feed_next_batch(BATCH_SIZE)
                     train_acc, cross_en = sess.run([accuracy, loss_value], feed_dict = {
@@ -553,6 +554,7 @@ def main(argv = None):
 
             NUMBER_OF_BATCH = 10000 / BATCH_SIZE
             t_acc = []
+            sys.exit()
             for i in range(0,NUMBER_OF_BATCH):
                 (batch_x, batch_y) = test_data.feed_next_batch(BATCH_SIZE)
                 test_acc = sess.run(accuracy, feed_dict = {

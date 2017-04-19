@@ -8,13 +8,6 @@ import Clustering_weights_cifar10
 # os.system('python training_v3.py -p4')
 # os.system('python training_v3.py -p4')
 # os.system('python training_v3.py -p5')
-def dump_to_txt_files(pt_acc_list, acc_list):
-    with open("ptacc_cifar_quantize_han.txt", "w") as f:
-        for item in pt_acc_list:
-            f.write("%s\n"%item)
-    with open("acc_cifar_quantize_han.txt", "w") as f:
-        for item in acc_list:
-            f.write("%s\n"%item)
 
 acc_list = []
 pt_acc_list = []
@@ -24,9 +17,10 @@ pfc = 0
 retrain = 0
 parent_dir = './'
 base_model = 'base.pkl'
-cluster = [64, 128, 256, 512, 1024]
+# cluster = [16, 32, 64, 128, 256, 512]
+cluster = [256, 512]
 while (count < len(cluster)):
-    Clustering_weights_cifar10.main(cluster[count])
+    # Clustering_weights_cifar10.main(cluster[count])
     # measure acc
     param = [
         ('-pcov',pcov),
@@ -61,10 +55,16 @@ while (count < len(cluster)):
     train_acc = quantized_training.main(param)
     pt_acc_list.append(pre_train_acc)
     acc_list.append(train_acc)
-    print(pt_acc_list)
-    print(acc_list)
     dump_to_txt_files(pt_acc_list, acc_list)
     count = count + 1
 print('accuracy summary: {}'.format(pt_acc_list))
 print('accuracy summary: {}'.format(acc_list))
 # acc_list = [0.82349998, 0.8233, 0.82319999, 0.81870002, 0.82050002, 0.80400002, 0.74940002, 0.66060001, 0.5011]
+
+def dump_to_txt_files(pt_acc_list, acc_list):
+    with open("ptacc_cifar_quantize_han.txt", "w") as f:
+        for item in pt_acc_list:
+            f.write("%s\n"%item)
+    with open("acc_cifar_quantize_han.txt", "w") as f:
+        for item in acc_list:
+            f.write("%s\n"%item)
