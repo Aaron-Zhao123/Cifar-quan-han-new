@@ -479,11 +479,6 @@ def main(argv = None):
         ops.reset_default_graph()
         with tf.Session() as sess:
             sess.run(init)
-            # restore model if exists
-            # if (os.path.isfile("tmp_20160130/model.meta")):
-            #     op = tf.train.import_meta_graph("tmp_20160130/model.meta")
-            #     op.restore(sess,tf.train.latest_checkpoint('tmp_20160130/'))
-            #     print ("model found and restored")
 
             keys = ['cov1', 'cov2', 'fc1', 'fc2', 'fc3']
             for key in keys:
