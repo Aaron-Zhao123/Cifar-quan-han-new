@@ -83,6 +83,8 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
     for key in keys:
         s = np.shape(cluster_index[key])
         sn = s + (NUMBER_OF_CLUSTER,)
+        print(s)
+        print(sn)
         tmp = np.zeros(sn)
         for i in range(1, NUMBER_OF_CLUSTER + 1):
             tmp[i-1] = (cluster_index[key] == i)
