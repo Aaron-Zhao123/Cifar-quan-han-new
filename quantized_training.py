@@ -512,6 +512,8 @@ def main(argv = None):
                             print("training accuracy is large, show the list: {}".format(accuracy_list))
                             NUMBER_OF_BATCH = 10000 / BATCH_SIZE
                             t_acc = []
+                            print('failed in test here')
+                            sys.exit()
                             for i in range(0,NUMBER_OF_BATCH):
                                 (batch_x, batch_y) = test_data.feed_next_batch(BATCH_SIZE)
                                 test_acc = sess.run(accuracy, feed_dict = {
