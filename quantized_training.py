@@ -569,9 +569,11 @@ def main(argv = None):
                 keys = ['cov1','cov2','fc1','fc2','fc3']
                 weights_save = {}
                 centroids_save = {}
+                biases_save = {}
                 for key in keys:
                     centroids_save[key] = centroids_var[key].eval()
                     weights_save[key] = weights[key].eval()
+                    biases_save[key] = biases[key].eval()
 
                 with open(parent_dir + 'weights/'+ 'weights'+str(NUMBER_OF_CLUSTER)+'.pkl','wb') as f:
                     pickle.dump((weights_save, biases_orgs, cluster_index,centroids_save),f)
