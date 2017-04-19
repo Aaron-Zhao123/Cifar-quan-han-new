@@ -31,7 +31,7 @@ while (count < len(cluster)):
         ('-parent_dir', parent_dir),
         ('-base_model', base_model)
         ]
-    pre_train_acc = quantized_training.main(param)
+    # pre_train_acc = quantized_training.main(param)
     param = [
         ('-pcov',pcov),
         ('-pfc',pfc),
