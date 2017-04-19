@@ -491,7 +491,7 @@ def main(argv = None):
             start = time.time()
             if TRAIN == 1:
                 for i in range(0,10000):
-                    (batch_x, batch_y) = t_data.feed_next_batch(BATCH_SIZE)
+                    (batch_x, batch_y) = t_data.feed_next_batch(8)
                     train_acc, cross_en = sess.run([accuracy, loss_value], feed_dict = {
                                     x: batch_x,
                                     y: batch_y,
@@ -512,8 +512,6 @@ def main(argv = None):
                             print("training accuracy is large, show the list: {}".format(accuracy_list))
                             NUMBER_OF_BATCH = 10000 / BATCH_SIZE
                             t_acc = []
-                            print('failed in test here')
-                            sys.exit()
                             for i in range(0,NUMBER_OF_BATCH):
                                 (batch_x, batch_y) = test_data.feed_next_batch(BATCH_SIZE)
                                 test_acc = sess.run(accuracy, feed_dict = {
