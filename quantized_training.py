@@ -76,6 +76,19 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
     #     'fc2': tf.constant(cluster_index['fc2'],tf.float32),
     #     'fc3': tf.constant(cluster_index['fc3'],tf.float32)
     # }
+
+    #  reconfig weights_index
+    weights_index = {}
+    keys = ['cov1','cov2','fc1','fc2', 'fc3']
+    for key in keys:
+        s = np.shape(cluster_index[key])
+        sn = sn + (NUMBER_OF_CLUSTER,)
+        tmp = np.zeros(sn)
+        for i in range(1, NUMBER_OF_CLUSTER + 1):
+            tmp[i-1] = (cluster_index[key] == i)
+        weights_index[key] = tmp
+    print(np.shape(weights_index['fc1']))
+    sys.exit()
     weights_index = {
         'cov1': cluster_index['cov1'],
         'cov2': cluster_index['cov2'],
