@@ -18,9 +18,8 @@ retrain = 0
 parent_dir = './'
 base_model = 'base.pkl'
 cluster = [16, 32, 64, 128]
-cluster = [256]
 while (count < len(cluster)):
-    # Clustering_weights_cifar10.main(cluster[count])
+    Clustering_weights_cifar10.main(cluster[count])
     # measure acc
     param = [
         ('-pcov',pcov),
@@ -31,7 +30,7 @@ while (count < len(cluster)):
         ('-parent_dir', parent_dir),
         ('-base_model', base_model)
         ]
-    # pre_train_acc = quantized_training.main(param)
+    pre_train_acc = quantized_training.main(param)
     param = [
         ('-pcov',pcov),
         ('-pfc',pfc),

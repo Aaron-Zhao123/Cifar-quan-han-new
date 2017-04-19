@@ -81,8 +81,8 @@ def initialize_variables(exist, parent_dir, NUMBER_OF_CLUSTER, pretrain):
         for i in range(1, NUMBER_OF_CLUSTER + 1):
             tmp[...,i-1] = (cluster_index[key] == i)
         weights_index[key] = tmp.astype(np.float32)
-    print('in initial vairables')
-    print(np.shape(weights_index['cov1']))
+    # print('in initial vairables')
+    # print(np.shape(weights_index['cov1']))
 
     # weights_index = {
     #     'cov1': cluster_index['cov1'],
