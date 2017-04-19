@@ -556,7 +556,6 @@ def main(argv = None):
                                         y: batch_y,
                                         keep_prob: 1.0})
                 t_acc.append(test_acc)
-            sys.exit()
             print("test accuracy is {}".format(t_acc))
                 # save_pkl_model(weights, biases, model_name)
         return np.mean(t_acc)
